@@ -24,6 +24,9 @@ import com.naver.maps.map.NaverMap
 import com.naver.maps.map.NaverMapOptions
 import com.naver.maps.map.overlay.OverlayImage
 import com.naver.maps.map.util.FusedLocationSource
+import com.naver.maps.geometry.LatLng
+import com.mjstudio.reactnativenavermap.mapview.QuickLocationSource
+
 
 @SuppressLint("ViewConstructor")
 class RNCNaverMapView(
@@ -127,12 +130,14 @@ class RNCNaverMapView(
     attacherLayoutParams.topMargin = 99999999
     attacherGroup!!.setLayoutParams(attacherLayoutParams)
     addView(attacherGroup)
+
   }
 
   override fun onAttachedToWindow() {
     super.onAttachedToWindow()
     locationOverlayImageRenderer.onAttach()
     locationOverlaySubImageRenderer.onAttach()
+
   }
 
   override fun onDetachedFromWindow() {
@@ -203,14 +208,16 @@ class RNCNaverMapView(
       }
     }
 
-  fun setupLocationSource() {
-    reactContext.currentActivity?.also { activity ->
-      val source = FusedLocationSource(activity, 100)
-      withMap {
-        it.locationSource = source
-      }
+fun setupLocationSource() {
+  reactContext.currentActivity?.also { activity ->
+    val source = QuickLocationSource(activity)
+
+    withMap { map ->
+      map.locationSource = source
     }
   }
+  
+}
 
   fun setLocationOverlayImage(image: ReadableMap?) {
     locationOverlayImageRenderer.setImage(image) { overlayImage ->

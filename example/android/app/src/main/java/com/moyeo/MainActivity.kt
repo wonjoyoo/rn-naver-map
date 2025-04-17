@@ -1,4 +1,4 @@
-package com.navermapexample
+package com.moyeo
 
 import com.facebook.react.ReactActivity
 import com.facebook.react.ReactActivityDelegate

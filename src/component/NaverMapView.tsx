@@ -387,6 +387,18 @@ export interface NaverMapViewProps extends ViewProps {
   }[];
 
   /**
+   * GPS 현재위치 업데이트 주기
+   * @default 5000,
+   */
+  locationUpdateInterval?: number;
+
+  /**
+   * GPS 현재위치 업데이트 거리, 미터단위로 10미터 이상일 경우에만 업데이트
+   * @default 10,
+   */
+  locationUpdateDistance?: number;
+
+  /**
    * 지도의 최대 초당 프레임 수(FPS, frames per second)를 지정합니다.
    *
    * 지도 객체가 생길때의 초기값만 동작하고 동적으로 바꿀 수 없습니다.
@@ -640,6 +652,8 @@ export const NaverMapView = forwardRef(
       locale,
       clusters,
       fpsLimit = 0,
+      locationUpdateInterval = 5000,
+      locationUpdateDistance = 10,
       // locationOverlay,
       onTapClusterLeaf,
 

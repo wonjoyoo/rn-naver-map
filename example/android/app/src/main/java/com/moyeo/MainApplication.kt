@@ -1,4 +1,4 @@
-package com.navermapexample
+package com.moyeo
 
 import android.app.Application
 import com.facebook.react.PackageList

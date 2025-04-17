@@ -326,6 +326,8 @@ export default function App() {
           ref={ref}
           style={{ flex: 1 }}
           mapType={mapType}
+          locationUpdateInterval={5000} // 5초
+          locationUpdateDistance={20} // 20미터
           layerGroups={{
             BUILDING: true,
             BICYCLE: false,
@@ -343,7 +345,10 @@ export default function App() {
           isShowZoomControls={zoomControls}
           isShowLocationButton={myLocation}
           // isExtentBoundedInKorea
-          onInitialized={() => console.log('initialized!')}
+          onInitialized={() => {
+            console.log('initialized!');
+            ref.current?.setLocationTrackingMode('Follow');
+          }}
           // onOptionChanged={() => console.log('Option Changed!')}
           onCameraChanged={({ region }) => {
             // console.log(`Camera: ${formatJson({ latitude, longitude })}`);
