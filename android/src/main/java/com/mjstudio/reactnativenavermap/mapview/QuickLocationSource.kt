@@ -15,9 +15,8 @@ class QuickLocationSource(
   private val context: Context,
   private var minTime: Long = 5000L,
   private var minDistance: Float = 10f,
-
-) : LocationSource, LocationListener {
-
+) : LocationSource,
+  LocationListener {
   private var listener: LocationSource.OnLocationChangedListener? = null
   private val locationManager =
     context.getSystemService(Context.LOCATION_SERVICE) as? LocationManager
@@ -36,7 +35,7 @@ class QuickLocationSource(
       LocationManager.GPS_PROVIDER,
       minTime,
       minDistance,
-      this
+      this,
     )
   }
 
@@ -49,12 +48,22 @@ class QuickLocationSource(
   override fun onLocationChanged(location: Location) {
     listener?.onLocationChanged(location)
   }
-  override fun onStatusChanged(provider: String?, status: Int, extras: Bundle?) {}
+
+  override fun onStatusChanged(
+    provider: String?,
+    status: Int,
+    extras: Bundle?,
+  ) {}
+
   override fun onProviderEnabled(provider: String) {}
+
   override fun onProviderDisabled(provider: String) {}
-  
+
   // 런타임에 호출할 수 있는 업데이트 메서드
-  fun updateRequestParams(time: Long, distance: Float) {
+  fun updateRequestParams(
+    time: Long,
+    distance: Float,
+  ) {
     // deactivate 된 뒤 다시 activate 될 때 새로운 값 사용하게 변경
     minTime = time
     minDistance = distance
